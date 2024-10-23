@@ -1,17 +1,15 @@
 import './App.css'
+import config from './config/config';
 
 function App() {
 
-  const envKey = import.meta.env;
+    const {appwriteUrl, appwriteProjectId, appwriteDatabaseId, appwriteCollectionId, appwriteBucketId} = config;
 
-  console.log(envKey.VITE_APPWRITE_URL);
-  
-
-  return (
+    return (
 		<>
-			<h1>Blog App with React + Vite</h1>
+			<h1>Blog App with React + Vite {appwriteUrl}</h1>
 		</>
-  );
+	);
 }
 
 export default App

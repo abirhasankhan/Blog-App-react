@@ -1,15 +1,51 @@
+import { useDispatch } from 'react-redux';
 import './App.css'
-import config from './config/config';
+import { useState, useEffect } from 'react';
+import authService from "./appwrite/auth";
+import { login, logout } from './store/authSlice';
+import { Header, Footer } from './components';
+
 
 function App() {
+	const [loading, setLoading] = useState(true);
 
-    const {appwriteUrl, appwriteProjectId, appwriteDatabaseId, appwriteCollectionId, appwriteBucketId} = config;
+	const dispatch = useDispatch();
 
-    return (
-		<>
-			<h1>Blog App with React + Vite {appwriteUrl}</h1>
-		</>
-	);
+	useEffect(() => {
+
+		// checking current user session
+		authService
+			.getCurrentUser()
+			.then((userData) => {
+				if (userData) {
+					// console.log("Login action dispatched");
+					dispatch(login({ userData }));
+				} else {
+					// console.log("Logout action dispatched");
+					dispatch(logout());
+				}
+			})
+			.catch((error) => {
+				console.log("Appwrite service :: getCurrentUser :: Error", error.message);
+			})
+			.finally(() => setLoading(false));
+
+
+	});
+
+	return !loading ? (
+		<div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+			<div className="w-full block">
+				<Header />
+				<main>
+					{/* <Outlet />  */}
+					
+					TODO
+				</main>
+				<Footer />
+			</div>
+		</div>
+	) : null;
 }
 
 export default App

@@ -62,8 +62,8 @@ export class AuthService {
 
         } catch (err) {
             console.error("Appwrite service :: getCurrentUser :: Error", err.message);
-            throw new Error("Failed to retrieve user. Please try again later.");
         }
+        return null;
     }
 
     // Logout method

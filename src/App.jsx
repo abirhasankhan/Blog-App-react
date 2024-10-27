@@ -11,9 +11,8 @@ function App() {
 
 	const dispatch = useDispatch();
 
+	// checking current user session
 	useEffect(() => {
-
-		// checking current user session
 		authService
 			.getCurrentUser()
 			.then((userData) => {
@@ -26,11 +25,12 @@ function App() {
 				}
 			})
 			.catch((error) => {
-				console.log("Appwrite service :: getCurrentUser :: Error", error.message);
+				console.log(
+					"Appwrite service :: getCurrentUser :: Error",
+					error.message
+				);
 			})
 			.finally(() => setLoading(false));
-
-
 	});
 
 	return !loading ? (
@@ -39,7 +39,6 @@ function App() {
 				<Header />
 				<main>
 					{/* <Outlet />  */}
-					
 					TODO
 				</main>
 				<Footer />

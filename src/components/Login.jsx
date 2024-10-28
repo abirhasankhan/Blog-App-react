@@ -61,7 +61,7 @@ function Login() {
 					to="/signup"
 					className="font-medium text-primary transition-all duration-200 hover:underline"
 				>
-					Sign up
+					Sign Up
 				</Link>
 			</p>
 
@@ -76,18 +76,7 @@ function Login() {
 						placeholder="Enter your email"
 						type="email"
 						{...register("email", {
-							required: true,
-							validate: {
-								// for email validation
-								matchPattern: (value) => {
-									const emailRegex =
-										/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-									return (
-										emailRegex.test(value) ||
-										"Invalid email format"
-									);
-								},
-							},
+							required: true
 						})}
 					/>
 
@@ -97,19 +86,8 @@ function Login() {
                     placeholder="Enter your password"
                     type="password"
                     {...register("password", {
-                        required: true,
-                        minLength: 6,
-                        validate: {
-                            matchPattern: (value) => {
-                                const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-                                return (
-                                    passwordRegex.test(value) ||
-                                    "Password must contain at least one uppercase letter, one lowercase letter and one number"
-                                );
-                            },
-                        },
-
-                    })}
+                        required: true
+					})}
                     />
 
                     <Button

@@ -10,36 +10,34 @@ export default function Protected({children, authentication = true}) {
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
+		//TODO make it more easy
 
-        //TODO make it more easy
+		// method 1
+		// if(authStatus === true) {
 
-        // if(authStatus === true) {
+		//     navigate('/');
 
-        //     navigate('/');
+		// } else if(authStatus === false) {
 
-        // } else if(authStatus === false) {
+		//     navigate('/login');
+		// }
 
-        //     navigate('/login');
-        // }
-
-        // if (authStatus !== authentication) {
+		// method 2
+		// if (authStatus !== authentication) {
 		// 	navigate(authentication ? "/login" : "/");
 		// }
 
+		// method 3
+		if (authentication && authStatus !== authentication) {
+			navigate("/login");
+		} else if (!authentication && authStatus !== authentication) {
+			navigate("/");
+		}
 
-        if(authentication && authStatus !== authentication){
+		setLoader(false);
 
-            navigate('/login');
+	},[authStatus, navigate, authentication])
 
-        } else if(!authentication && authStatus !== authentication){
-
-            navigate('/');
-        }
-
-        setLoader(false);
-
-    },[authStatus, navigate, authentication])
-
-    return loader ? <h1>Loading...</h1> : children
+    return loader ? <h1>Loading...</h1> : <>{children}</>
 }
 
